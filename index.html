@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#080c16">
+  <meta name="description" content="AIDossier — реестр AI-систем, предварительная оценка риска и генератор прозрачностных материалов для бизнеса.">
+  <meta property="og:title" content="AIDossier — operational AI governance for SMEs">
+  <meta property="og:description" content="Инвентаризация ИИ, readiness score, чек-лист, AI-политика и уведомления Article 50.">
+  <title>AIDossier — AI governance workspace</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><img src="./favicon.svg" alt=""><span>AIDossier</span><small>EU READY</small></a>
+  <div class="top-actions"><button class="button ghost" id="shareSystem">Поделиться карточкой</button><button class="button primary" id="exportJson">Экспорт реестра</button></div>
+</header>
+<main>
+  <section class="hero">
+    <div><span class="eyebrow">Operational AI governance for SMEs</span><h1>Знайте, где ваш бизнес использует ИИ — и что с этим делать.</h1><p>AIDossier превращает разрозненные AI-инструменты в управляемый реестр: владельцы, цели, данные, предварительный риск, задачи, прозрачностные уведомления и внутренняя политика.</p><div class="chips"><span>AI inventory</span><span>Article 50 notices</span><span>AI literacy</span><span>Local-first</span><span>PDF / CSV / JSON</span></div></div>
+    <aside class="deadline-card"><span>Ближайшая контрольная дата</span><strong>2 августа 2026</strong><small>Прозрачностные требования Article 50 начинают применяться. Высокорисковая классификация требует отдельной профессиональной проверки.</small></aside>
+  </section>
+  <section class="layout">
+    <aside class="sidebar panel">
+      <div class="sidebar-head"><h2>AI‑реестр</h2><span id="systemsValue">1</span></div>
+      <div class="empty" id="emptySystems">Добавьте первую систему.</div>
+      <div class="system-list" id="systemList"></div>
+      <button class="button primary wide" id="newSystem">+ Добавить систему</button>
+      <button class="button danger wide" id="deleteSystem">Удалить выбранную</button>
+    </aside>
+    <section class="workspace">
+      <div class="overview panel">
+        <div class="overview-head"><div class="overview-title"><small id="activePurpose"></small><h2 id="activeName"></h2></div><span class="risk-badge" id="riskBadge"></span></div>
+        <div class="score-grid"><div class="score-card"><span>Готовность</span><strong id="readinessValue">0%</strong><div class="progress"><i id="readinessBar"></i></div></div><div class="score-card"><span>Открытых задач</span><strong id="tasksValue">0</strong></div><div class="score-card"><span>Индекс риска</span><strong id="riskValue">0</strong></div><div class="score-card"><span>Систем в реестре</span><strong id="systemsValue2">—</strong><script>document.addEventListener('DOMContentLoaded',()=>{new MutationObserver(()=>document.getElementById('systemsValue2').textContent=document.getElementById('systemsValue').textContent).observe(document.getElementById('systemsValue'),{childList:true});document.getElementById('systemsValue2').textContent=document.getElementById('systemsValue').textContent})</script></div></div>
+      </div>
+      <div class="tabs"><button class="tab active" data-tab="inventory">Карточка</button><button class="tab" data-tab="assessment">Оценка</button><button class="tab" data-tab="checklist">План действий</button><button class="tab" data-tab="policy">AI‑политика</button><button class="tab" data-tab="notices">Уведомления</button></div>
+      <div class="tab-panel active" id="tab-inventory"><section class="section panel"><div class="section-head"><h2>Карточка AI-системы</h2><small>Автосохранение в браузере</small></div><div class="grid two"><label>Название<input id="name"></label><label>Владелец / подразделение<input id="owner"></label><label>Поставщик или модель<input id="vendor"></label><label>Роль организации<select id="role"><option value="deployer">Deployer / пользователь</option><option value="provider">Provider / поставщик</option><option value="importer">Importer</option><option value="distributor">Distributor</option></select></label><label>Сценарий<select id="category"><option value="chatbot">Чат-бот / copilot</option><option value="content">Генерация контента</option><option value="hr">HR и найм</option><option value="education">Образование</option><option value="credit">Кредит / финансы</option><option value="medical">Медицина</option><option value="biometric">Биометрия</option><option value="internal">Внутренний помощник</option></select></label><label>Аудитория<select id="audience"><option value="customers">Клиенты</option><option value="employees">Сотрудники</option><option value="public">Публичная аудитория</option><option value="partners">Партнёры</option></select></label><label>Категории данных<select id="data"><option value="none">Без персональных данных</option><option value="personal">Персональные данные</option><option value="sensitive">Чувствительные данные</option><option value="confidential">Коммерческая тайна</option></select></label><label>Регион использования<select id="region"><option value="EU">Европейский союз</option><option value="global">Глобально</option><option value="other">Вне ЕС</option></select></label></div><label>Цель и реальное использование<textarea id="purpose" rows="4"></textarea></label><div class="legal">Инструмент выполняет предварительную операционную оценку. Он не определяет юридический статус системы и не заменяет проверку по официальному AI Act Compliance Checker или консультацию специалиста.</div></section></div>
+      <div class="tab-panel" id="tab-assessment"><section class="section panel"><div class="section-head"><h2>Предварительная оценка применения</h2><small>Ответьте по фактическому использованию</small></div><div class="question-list" id="questionList"></div></section></div>
+      <div class="tab-panel" id="tab-checklist"><section class="section panel"><div class="section-head"><h2>План действий</h2><div class="toolbar"><button class="button ghost" id="exportCsv">Экспорт CSV</button></div></div><div class="checklist" id="checklist"></div></section></div>
+      <div class="tab-panel" id="tab-policy"><section class="section panel"><div class="section-head"><h2>Готовый внутренний документ</h2><div class="toolbar"><button class="button ghost" id="copyPolicy">Копировать</button><button class="button primary" id="printPolicy">PDF / печать</button></div></div><article class="document" id="policyDocument"></article></section></div>
+      <div class="tab-panel" id="tab-notices"><section class="section panel"><div class="section-head"><h2>Transparency kit</h2><small>Базовые формулировки для адаптации</small></div><div class="notice-grid"><article class="notice"><h3>Чат-бот / помощник</h3><p id="chatNotice"></p><button class="button ghost" id="copyChat">Копировать</button></article><article class="notice"><h3>AI-generated content</h3><p id="contentNotice"></p><button class="button ghost" id="copyContent">Копировать</button></article><article class="notice"><h3>Внутренний copilot</h3><p id="internalNotice"></p><button class="button ghost" id="copyInternal">Копировать</button></article></div></section></div>
+    </section>
+  </section>
+</main>
+<footer class="page-footer"><span>AIDossier MVP · данные хранятся только в браузере</span><span>Не является юридической консультацией</span></footer>
+<div class="toast" id="toast"></div>
+<script src="./app.js"></script>
+</body>
+</html>
